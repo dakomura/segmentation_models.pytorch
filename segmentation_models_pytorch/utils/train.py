@@ -2,7 +2,8 @@ import sys
 import torch
 from tqdm import tqdm as tqdm
 from .meter import AverageValueMeter
-
+from apex import amp, optimizers
+opt_level = 'O1'
 
 class Epoch:
 
@@ -86,7 +87,9 @@ class TrainEpoch(Epoch):
         self.optimizer.zero_grad()
         prediction = self.model.forward(x)
         loss = self.loss(prediction, y)
-        loss.backward()
+
+        with amp.scale_loss(loss, self.optimizer) as scaled_loss:
+            scaled_loss.backward()
         self.optimizer.step()
         return loss, prediction
 
