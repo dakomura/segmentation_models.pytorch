@@ -48,6 +48,7 @@ class Epoch:
                 for d in data:
                     #x, y = x.to(self.device), y.to(self.device)
                     x, y = d['image'], d['mask']
+                    print(x.shape,y.shape)
                     loss, y_pred = self.batch_update(x, y)
 
                     # update loss logs
