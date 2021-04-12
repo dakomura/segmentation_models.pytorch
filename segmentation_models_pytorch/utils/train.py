@@ -79,6 +79,7 @@ class TrainEpoch(Epoch):
             verbose=verbose,
         )
         self.optimizer = optimizer
+        self.model, self.optimizer = amp.initialize(self.model, self.optimizer) #apex
 
     def on_epoch_start(self):
         self.model.train()
