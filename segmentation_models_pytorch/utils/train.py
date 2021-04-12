@@ -82,7 +82,7 @@ class TrainEpoch(Epoch):
             verbose=verbose,
         )
         self.optimizer = optimizer
-        self.model, self.optimizer = amp.initialize(self.model, self.optimizer, opt_level=opt_level) #apex
+#        self.model, self.optimizer = amp.initialize(self.model, self.optimizer, opt_level=opt_level) #apex
 
     def on_epoch_start(self):
         self.model.train()
@@ -92,8 +92,8 @@ class TrainEpoch(Epoch):
         prediction = self.model.forward(x)
         loss = self.loss(prediction, y)
 
-        with amp.scale_loss(loss, self.optimizer) as scaled_loss:
-            scaled_loss.backward()
+#        with amp.scale_loss(loss, self.optimizer) as scaled_loss:
+#            scaled_loss.backward()
         self.optimizer.step()
         return loss, prediction
 
