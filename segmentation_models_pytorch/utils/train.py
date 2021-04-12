@@ -47,7 +47,8 @@ class Epoch:
             for data in iterator:
                 for d in data:
                     #x, y = x.to(self.device), y.to(self.device)
-                    x, y = d['image'].permute(0,3,1,2), d['mask'].squeeze()
+                    #x, y = d['image'].permute(0,3,1,2), d['mask'].squeeze()
+                    x, y = d['image'], d['mask'].squeeze()
                     loss, y_pred = self.batch_update(x, y)
 
                     # update loss logs
