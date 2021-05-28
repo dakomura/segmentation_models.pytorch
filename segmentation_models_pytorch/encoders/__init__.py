@@ -1,5 +1,6 @@
 import functools
 import torch.utils.model_zoo as model_zoo
+import torch
 
 from .resnet import resnet_encoders
 from .dpn import dpn_encoders
@@ -58,7 +59,7 @@ def get_encoder(name, in_channels=3, depth=5, weights=None):
         if settings["url"].startswith('http'):
             encoder.load_state_dict(model_zoo.load_url(settings["url"]))
         else:
-            encoder.load_state_dict(settings["url"])
+            encoder.load_state_dict(torch.load(settings["url"]))
 
 
     encoder.set_in_channels(in_channels)
