@@ -54,8 +54,9 @@ def get_encoder(name, in_channels=3, depth=5, weights=None):
             raise KeyError("Wrong pretrained weights `{}` for encoder `{}`. Available options are: {}".format(
                 weights, name, list(encoders[name]["pretrained_settings"].keys()),
             ))
+
         if settings["url"].startswith('http'):
-	    encoder.load_state_dict(model_zoo.load_url(settings["url"]))
+            encoder.load_state_dict(model_zoo.load_url(settings["url"]))
         else:
             encoder.load_state_dict(settings["url"])
 
